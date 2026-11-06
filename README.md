@@ -4,6 +4,8 @@
 
 Windows 桌面应用（Electron），多台电脑可以同时监控同一个仓库。
 
+> 版本记录：[RELEASE-NOTES.md](./RELEASE-NOTES.md)（当前 1.0.0）
+
 > **不需要装 Node.js，也不需要装 Git。**
 > Electron 运行时和完整 Git 运行时都随程序一起分发，双击安装包即可使用。
 
