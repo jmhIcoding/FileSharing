@@ -1,0 +1,69 @@
+{
+  "name": "filesharing",
+  "productName": "FileSharing",
+  "version": "1.0.0",
+  "description": "本地目录 Git 自动同步监控工具",
+  "main": "main.js",
+  "author": "JMH",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder --win nsis portable",
+    "vendor-git": "node build/vendor-git.js",
+    "build:portable": "node build/vendor-git.js && node build/package-portable.js",
+    "build:installer": "node build/clean-dist.js && electron-builder --win nsis --x64",
+    "test": "node build/test-credentials.js && node build/test-ignore.js && node build/test-init.js && node build/selftest.js",
+    "test:credentials": "node build/test-credentials.js",
+    "test:ignore": "node build/test-ignore.js",
+    "test:init": "node build/test-init.js",
+    "test:sync": "node build/selftest.js",
+    "test:live": "node build/test-live-github.js",
+    "smoke:live": "electron build/smoke-live.js"
+  },
+  "devDependencies": {
+    "electron": "^38.0.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.jmh.filesharing",
+    "productName": "FileSharing",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "core/**/*",
+      "renderer/**/*",
+      "assets/**/*",
+      "vendor/**/*"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "FileSharing-${version}-${arch}.${ext}",
+      "icon": "assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": true,
+      "createDesktopShortcut": true,
+      "shortcutName": "FileSharing",
+      "perMachine": false,
+      "runAfterFinish": true
+    },
+    "asar": false
+  }
+}
